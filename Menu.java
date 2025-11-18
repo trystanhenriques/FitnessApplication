@@ -298,7 +298,7 @@ public class Menu {
             }
             // DO the action
             else {
-
+                currentnd.runAction();
             }
         }
     }  
