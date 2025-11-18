@@ -1,26 +1,60 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Menu {
 
     class MenuNode {
 
-        String label;                   // label of the menu shown to the users
-        ArrayList<MenuNode> submenus;
+        private String label;                   // label of the menu shown to the users
+        private ArrayList<MenuNode> submenus;
+        private Runnable action;                // optional action used by the menu (only used if the menu has no submenus)
 
         // Constructor
         public MenuNode(String label) {
             this.label = label;
             this.submenus = new ArrayList<>();
         }
+        
+        // getters
+        public MenuNode getChild(int idx) {
+                    return submenus.get(idx);
+        }
+
+        public String getLabel() {return label;}
 
         // Method to add a node to the current node
         public void addSubMenu(MenuNode nd) {
             submenus.add(nd);               // add a submenu to the current menu option
         }
 
+        // To check if this menu node has as submenus?
+        public boolean hasSubMenus() {
+            return !submenus.isEmpty();      // Checks whether the sumbmenus array is empty
+        }
+
+        // TO check if the menu has an action
+        public boolean hasAction() {
+            return action == null;
+        }
+
+        // Method to get the number of submenus that the menu Node has
+        public int numOfSubmenus()
+        {
+            return submenus.size();
+        }
+        
+        // Mehtod to run the action
+        public void runAction()
+        {
+            if (action != null) {
+                action.run();
+            }
+        }
+
+    
     }
 
-    MenuNode root;
+    private MenuNode root;
 
     // Constructor to build the entire menu structure
     public Menu() {
@@ -189,4 +223,83 @@ public class Menu {
         root.addSubMenu(menu_goals);
 
     }
+
+    private void printHeader()
+    {
+
+    }
+
+    // TO start the application
+    public void start() {
+        navigate(root);
+    }
+
+    // Prints the menu nodes Submenues
+    private void printSubMenus(MenuNode nd)
+    {
+
+        for (int i = 0; i < nd.numOfSubmenus(); i++) {
+            int menuOptionNumber = i+1;
+            System.out.println(menuOptionNumber + ": " + nd.getChild(i).label);
+        }
+
+        if (nd != root)
+            System.out.println("0: Go Back");   // All submenus besided the main menu should have a "Go Back" option
+    }
+
+    // Method to navigate through the menu
+    public void navigate(MenuNode currentnd)
+    {
+        while (true) { 
+        
+
+            // Print the children of the current node. (we will likely call navigate with root as the first parameter)
+            printSubMenus(currentnd);
+
+            // Get input From the user
+            System.out.print("Enter Your Menu Choice: ");
+            Scanner scanner = new Scanner(System.in);               // Initialize scanner object
+            int choice = scanner.nextInt();                         // get the choice from the user
+
+            // Validate the users choice
+            //___________________________
+
+            // try {
+
+            //     //Case where the choice is <0 or > number of submenus
+            //     if (choice < 0 || choice > currentnd.numOfSubmenus()) {
+            //         throw new InvalidMenuSelectionException("Menu Choice does not exist");
+            //     }
+
+            //     // Case where the 
+            //     if (currentnd == root && choice == 0) {
+            //         throw new InvalidMenuSelectionException("You cannot go back at this point");
+            //     }
+                
+            // } catch (Exception e) {
+            //     System.out.println("Error! " + e.getMessage());
+            // }
+            
+
+            // Case where the user chose option '0': Go Back
+            if (choice == 0) {
+                return;
+            }
+
+            // Go to the next submenu if it has one; else do the action
+            if (currentnd.hasSubMenus()) {
+                // Go to the menu the user chose
+                navigate(currentnd.getChild(choice-1));                 // the index of the child is 1 less than choice because children is stored in 0 based indexing
+            }
+            // DO the action
+            else {
+
+            }
+        }
+    }  
+
+    //getters
+    public MenuNode getRoot() {return root;}
+
+
 }

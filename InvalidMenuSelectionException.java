@@ -1,7 +1,7 @@
 public class InvalidMenuSelectionException extends Exception
 {
-    public InvalidMenuSelectionException () {
-        super("Error! Invalid Menu Selection!");
+    public InvalidMenuSelectionException (String errorMsg) {
+        super("Error! " + errorMsg);
     }
 
 }
