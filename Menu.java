@@ -34,7 +34,7 @@ public class Menu {
 
         // TO check if the menu has an action
         public boolean hasAction() {
-            return action == null;
+            return action != null;
         }
 
         // Method to get the number of submenus that the menu Node has
@@ -264,21 +264,26 @@ public class Menu {
             // Validate the users choice
             //___________________________
 
-            // try {
+            try {
 
-            //     //Case where the choice is <0 or > number of submenus
-            //     if (choice < 0 || choice > currentnd.numOfSubmenus()) {
-            //         throw new InvalidMenuSelectionException("Menu Choice does not exist");
-            //     }
+                //Case where the choice is <0 or > number of submenus
+                if (choice < 0 || choice > currentnd.numOfSubmenus()) {
+                    throw new InvalidMenuSelectionException("Menu Choice does not exist");
+                }
 
-            //     // Case where the 
-            //     if (currentnd == root && choice == 0) {
-            //         throw new InvalidMenuSelectionException("You cannot go back at this point");
-            //     }
+                // Case where the 
+                if (currentnd == root && choice == 0) {
+                    throw new InvalidMenuSelectionException("You cannot go back at this point");
+                }
                 
-            // } catch (Exception e) {
-            //     System.out.println("Error! " + e.getMessage());
-            // }
+            } catch (InvalidMenuSelectionException e) {
+                System.out.println("Something Went Wrong: " + e.getMessage());     // print error message to the user
+                continue;                                           // reprint the menu and its options
+            
+            } catch (Exception e) {
+                System.out.println("Error! " + e.getMessage());     // print error message to the user
+                continue; 
+            }
             
 
             // Case where the user chose option '0': Go Back
