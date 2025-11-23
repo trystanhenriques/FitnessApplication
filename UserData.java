@@ -1,15 +1,15 @@
 import java.util.Calendar;
 
-
 public class UserData {
 
-    private class PersonalInfo {
-        int age;
-        int weight_lbs;
-        Calendar dateOfEntry;
-        int height_cm;
-        int activityLevel;
-        char gender; // Male (m) or Female (f)
+    public static class PersonalInfo {
+
+        private int age;
+        private int weight_lbs;
+        private Calendar dateOfEntry;
+        private int height_cm;
+        private int activityLevel;
+        private char gender; // Male (m) or Female (f)
         
         // Constructor
         public PersonalInfo(int age, int weight, int height, int activityLevel, char gender, String dateOfEntryString)
