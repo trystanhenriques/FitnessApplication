@@ -12,7 +12,7 @@ public class UserData {
         private char gender; // Male (m) or Female (f)
         
         // Constructor
-        public PersonalInfo(int age, int weight, int height, int activityLevel, char gender, String dateOfEntryString)
+        public PersonalInfo(int age, double weight, int height, int activityLevel, char gender, String dateOfEntryString)
         {
             this.age = age;
             this.weight_lbs = weight;
@@ -43,7 +43,7 @@ public class UserData {
 
         // getters
         public int getAge() {return age;}
-        public int getWeight_lbs() {return weight_lbs;}
+        public double  getWeight_lbs() {return weight_lbs;}
         public int getHeight_cm() {return height_cm;}
         public int getActivityLevel() {return activityLevel;}
         public char getGender() {return gender;}
