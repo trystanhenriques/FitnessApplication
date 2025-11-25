@@ -5,7 +5,7 @@ public class UserData {
     public static class PersonalInfo {
 
         private int age;
-        private int weight_lbs;
+        private double weight_lbs;
         private Calendar dateOfEntry;
         private int height_cm;
         private int activityLevel;
