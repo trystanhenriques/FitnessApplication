@@ -2,6 +2,13 @@ import java.util.Calendar;
 
 public class UserData {
 
+    private PersonalInfo personalInfo;
+
+    // setters
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
+    }
+
     public static class PersonalInfo {
 
         private int age;
@@ -55,7 +62,6 @@ public class UserData {
         public void setActivityLevel(int activityLevel) {this.activityLevel = activityLevel;}
         public void setGender(char gender) {this.gender = gender;}
 
-        
-
     }
+        
 }
