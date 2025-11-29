@@ -65,9 +65,13 @@ public class Menu {
     }
 
     private MenuNode root;
+    private Scanner scanner;
 
     // Constructor to build the entire menu structure
     public Menu(PersonalInfoService personalInfoService) {
+
+        scanner = new Scanner(System.in);               // Initialize scanner object
+
         // Create Root Menu Node / Main Menu
         root = new MenuNode("Main Menu");
 
