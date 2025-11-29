@@ -256,7 +256,8 @@ public class Menu {
         }
 
         if (nd != root)
-            System.out.println("0: Go Back");   // All submenus besided the main menu should have a "Go Back" option
+            System.out.println("0: Go Back");               // All submenus besided the main menu should have a "Go Back" option
+            System.out.println("-1: Exit Application");     // All menus should have an exit application option
     }
 
     // Method to navigate through the menu
@@ -283,7 +284,7 @@ public class Menu {
             try {
 
                 //Case where the choice is <0 or > number of submenus
-                if (choice < 0 || choice > currentnd.numOfSubmenus()) {
+                if (choice < -1 || choice > currentnd.numOfSubmenus()) {
                     throw new InvalidMenuSelectionException("Menu Choice does not exist");
                 }
 
@@ -306,6 +307,12 @@ public class Menu {
             if (choice == 0) {
                 return;
             }
+            
+            // Case where the user chose option '-1': Exit Application
+            if (choice == -1) {
+                System.out.println("Exiting Fitness Application! Goodbye!");
+                System.exit(0);
+            }
 
             
             MenuNode selectedMenu = currentnd.getChild(choice-1);  // the menu option the user selected
@@ -319,11 +326,10 @@ public class Menu {
             else {
                 System.err.println("Testing: Do The Action");
                 selectedMenu.runAction();
+                navigate(currentnd);      // after the action is done, return to the current menu
             }
 
-            break;
         }
-        scanner.close();
     }  
 
     //getters
