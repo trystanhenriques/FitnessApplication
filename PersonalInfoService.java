@@ -12,7 +12,7 @@ public class PersonalInfoService {
     }
 
     // Method to enter the User's Personal Information
-    public void enterPersonalInfo() {
+    public void enterPersonalInfo(Scanner scanner) {
 
         
 
@@ -23,8 +23,6 @@ public class PersonalInfoService {
         int activityLevel;
         char gender;
         String dateOfEntryString;
-
-        Scanner scanner = new Scanner(System.in);           // Intialize scanner object
 
         //_______________________
         // Gender Input
@@ -142,9 +140,6 @@ public class PersonalInfoService {
         UserData.PersonalInfo personalInfo = new UserData.PersonalInfo(age, weight_lbs, height_cm, activityLevel, gender, dateOfEntryString);
         userData.setPersonalInfo(personalInfo);     // Update the UserData
 
-
-        // Close scanner object
-        scanner.close();
     }
 
 }

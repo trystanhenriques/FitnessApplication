@@ -65,9 +65,13 @@ public class Menu {
     }
 
     private MenuNode root;
+    private Scanner scanner;
 
     // Constructor to build the entire menu structure
     public Menu(PersonalInfoService personalInfoService) {
+
+        scanner = new Scanner(System.in);               // Initialize scanner object
+
         // Create Root Menu Node / Main Menu
         root = new MenuNode("Main Menu");
 
@@ -85,7 +89,7 @@ public class Menu {
 
         // Construct submenus for Personal Info
         MenuNode menu_personalInfo_enter = new MenuNode("Enter Personal Info");
-        menu_personalInfo_enter.setAction(() -> personalInfoService.enterPersonalInfo());     // set the enter personal info action
+        menu_personalInfo_enter.setAction(() -> personalInfoService.enterPersonalInfo(scanner));     // set the enter personal info action
 
         MenuNode menu_personalInfo_activity = new MenuNode("Activity Level");
         MenuNode menu_personalInfo_view = new MenuNode("View Personal Info");
@@ -265,8 +269,6 @@ public class Menu {
     {
         //testing (temp)
         System.out.println("Testing: Current MenuNode: " +  currentnd.getLabel());
-
-        Scanner scanner = new Scanner(System.in);               // Initialize scanner object
 
         while (true) { 
         
