@@ -2,17 +2,24 @@ import java.util.Calendar;
 
 public class UserData {
 
+    private PersonalInfo personalInfo;
+
+    // setters
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
+    }
+
     public static class PersonalInfo {
 
         private int age;
-        private int weight_lbs;
+        private double weight_lbs;
         private Calendar dateOfEntry;
         private int height_cm;
         private int activityLevel;
         private char gender; // Male (m) or Female (f)
         
         // Constructor
-        public PersonalInfo(int age, int weight, int height, int activityLevel, char gender, String dateOfEntryString)
+        public PersonalInfo(int age, double weight, int height, int activityLevel, char gender, String dateOfEntryString)
         {
             this.age = age;
             this.weight_lbs = weight;
@@ -43,7 +50,7 @@ public class UserData {
 
         // getters
         public int getAge() {return age;}
-        public int getWeight_lbs() {return weight_lbs;}
+        public double  getWeight_lbs() {return weight_lbs;}
         public int getHeight_cm() {return height_cm;}
         public int getActivityLevel() {return activityLevel;}
         public char getGender() {return gender;}
@@ -55,7 +62,6 @@ public class UserData {
         public void setActivityLevel(int activityLevel) {this.activityLevel = activityLevel;}
         public void setGender(char gender) {this.gender = gender;}
 
-        
-
     }
+        
 }

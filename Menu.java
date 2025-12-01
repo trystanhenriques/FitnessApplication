@@ -43,21 +43,35 @@ public class Menu {
             return submenus.size();
         }
         
-        // Mehtod to run the action
+        // Method to run the action
         public void runAction()
         {
+            System.out.println("DEBUG: running action for " + label);
             if (action != null) {
                 action.run();
             }
+            else {
+                System.out.println("DEBUG: NO ACTION SET!");
+            }
+        }
+
+        // Method to set the action of a menu option
+        public void setAction(Runnable action)
+        {
+            this.action = action;
         }
 
     
     }
 
     private MenuNode root;
+    private Scanner scanner;
 
     // Constructor to build the entire menu structure
-    public Menu() {
+    public Menu(PersonalInfoService personalInfoService) {
+
+        scanner = new Scanner(System.in);               // Initialize scanner object
+
         // Create Root Menu Node / Main Menu
         root = new MenuNode("Main Menu");
 
@@ -75,6 +89,8 @@ public class Menu {
 
         // Construct submenus for Personal Info
         MenuNode menu_personalInfo_enter = new MenuNode("Enter Personal Info");
+        menu_personalInfo_enter.setAction(() -> personalInfoService.enterPersonalInfo(scanner));     // set the enter personal info action
+
         MenuNode menu_personalInfo_activity = new MenuNode("Activity Level");
         MenuNode menu_personalInfo_view = new MenuNode("View Personal Info");
         MenuNode menu_personalInfo_remove = new MenuNode("Remove A Personal Info Entry");
@@ -244,12 +260,16 @@ public class Menu {
         }
 
         if (nd != root)
-            System.out.println("0: Go Back");   // All submenus besided the main menu should have a "Go Back" option
+            System.out.println("0: Go Back");               // All submenus besided the main menu should have a "Go Back" option
+            System.out.println("-1: Exit Application");     // All menus should have an exit application option
     }
 
     // Method to navigate through the menu
     public void navigate(MenuNode currentnd)
     {
+        //testing (temp)
+        System.out.println("Testing: Current MenuNode: " +  currentnd.getLabel());
+
         while (true) { 
         
 
@@ -258,7 +278,6 @@ public class Menu {
 
             // Get input From the user
             System.out.print("Enter Your Menu Choice: ");
-            Scanner scanner = new Scanner(System.in);               // Initialize scanner object
             int choice = scanner.nextInt();                         // get the choice from the user
 
             // Validate the users choice
@@ -267,7 +286,7 @@ public class Menu {
             try {
 
                 //Case where the choice is <0 or > number of submenus
-                if (choice < 0 || choice > currentnd.numOfSubmenus()) {
+                if (choice < -1 || choice > currentnd.numOfSubmenus()) {
                     throw new InvalidMenuSelectionException("Menu Choice does not exist");
                 }
 
@@ -290,16 +309,28 @@ public class Menu {
             if (choice == 0) {
                 return;
             }
+            
+            // Case where the user chose option '-1': Exit Application
+            if (choice == -1) {
+                System.out.println("Exiting Fitness Application! Goodbye!");
+                System.exit(0);
+            }
+
+            
+            MenuNode selectedMenu = currentnd.getChild(choice-1);  // the menu option the user selected
 
             // Go to the next submenu if it has one; else do the action
-            if (currentnd.hasSubMenus()) {
+            if (selectedMenu.hasSubMenus()) {
                 // Go to the menu the user chose
-                navigate(currentnd.getChild(choice-1));                 // the index of the child is 1 less than choice because children is stored in 0 based indexing
+                navigate(selectedMenu);                 // the index of the child is 1 less than choice because children is stored in 0 based indexing
             }
             // DO the action
             else {
-                currentnd.runAction();
+                System.err.println("Testing: Do The Action");
+                selectedMenu.runAction();
+                navigate(currentnd);      // after the action is done, return to the current menu
             }
+
         }
     }  
 
