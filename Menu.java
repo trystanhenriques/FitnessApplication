@@ -240,13 +240,24 @@ public class Menu {
 
     }
 
-    private void printHeader()
+    private void printStartHeader()
     {
+        System.out.println("===================================");
+        System.out.println("      FITNESS APPLICATION         ");
+        System.out.println("===================================\n");
 
+    }
+
+    private void printMenuNodeHeader(MenuNode nd)
+    {
+        System.out.println("\n===================================");
+        System.out.println("         " + nd.getLabel() + "         ");
+        System.out.println("===================================\n");
     }
 
     // TO start the application
     public void start() {
+        //printStartHeader();     // Header
         navigate(root);
     }
 
@@ -267,12 +278,12 @@ public class Menu {
     // Method to navigate through the menu
     public void navigate(MenuNode currentnd)
     {
-        //testing (temp)
-        System.out.println("Testing: Current MenuNode: " +  currentnd.getLabel());
 
-        while (true) { 
+        while (true) {
+            
+            //Print the header for the current menu node
+            printMenuNodeHeader(currentnd);
         
-
             // Print the children of the current node. (we will likely call navigate with root as the first parameter)
             printSubMenus(currentnd);
 
@@ -326,6 +337,9 @@ public class Menu {
             }
             // DO the action
             else {
+                
+                printMenuNodeHeader(selectedMenu);  // print header for selected menu
+
                 System.err.println("Testing: Do The Action");
                 selectedMenu.runAction();
                 navigate(currentnd);      // after the action is done, return to the current menu
