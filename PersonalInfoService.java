@@ -138,7 +138,7 @@ public class PersonalInfoService {
         // Construct the Personal Info Data
         // _______________________________
         UserData.PersonalInfo personalInfo = new UserData.PersonalInfo(age, weight_lbs, height_cm, activityLevel, gender, dateOfEntryString);
-        userData.setPersonalInfo(personalInfo);     // Update the UserData
+        userData.addPersonalInfoEntry(personalInfo);     // Update the UserData
 
     }
 

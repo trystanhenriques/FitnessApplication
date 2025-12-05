@@ -1,12 +1,12 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class UserData {
 
-    private PersonalInfo personalInfo;
+    private ArrayList<PersonalInfo> personalInfos = new ArrayList<>(10);                  // list of personal info entries
 
-    // setters
-    public void setPersonalInfo(PersonalInfo personalInfo) {
-        this.personalInfo = personalInfo;
+    public void addPersonalInfoEntry(PersonalInfo personalInfo) {
+        personalInfos.add(personalInfo);
     }
 
     public static class PersonalInfo {
