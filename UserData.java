@@ -8,6 +8,8 @@ public class UserData {
     public void addPersonalInfoEntry(PersonalInfo personalInfo) {
         personalInfos.add(personalInfo);
     }
+    public ArrayList<PersonalInfo> getPersonalInfos() {return personalInfos;}
+    public int numOfPerosonalInfoEntries() {return personalInfos.size();}
 
     public static class PersonalInfo {
 
@@ -54,6 +56,25 @@ public class UserData {
         public int getHeight_cm() {return height_cm;}
         public int getActivityLevel() {return activityLevel;}
         public char getGender() {return gender;}
+        
+        public String getActivityLevelString() {
+            switch (activityLevel) {
+                case 1:
+                    return "Sedentary        - little or no exercise";
+                case 2:
+                    return "Light            - exercise 1-3 times per week";
+                case 3:
+                    return "Moderate         - exercise 4-5 times per week";
+                case 4:
+                    return "Active           - daily exercise or intense exercise 3-4 times per week";
+                case 5:
+                    return "Very Active      - intense exercise 6-7 times per week";
+                case 6:
+                    return "Extra Active     - very intense exercise daily, or physical job";
+                default:
+                    throw new AssertionError();
+            }
+        }
 
         // setters
         public void setAge(int age) {this.age = age;}

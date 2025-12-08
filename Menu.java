@@ -88,11 +88,18 @@ public class Menu {
         MenuNode menu_personalInfo = new MenuNode("Personal Info");
 
         // Construct submenus for Personal Info
+        //______________________________________
+
+        // Enter Peronsal Info
         MenuNode menu_personalInfo_enter = new MenuNode("Enter Personal Info");
         menu_personalInfo_enter.setAction(() -> personalInfoService.enterPersonalInfo(scanner));     // set the enter personal info action
 
         MenuNode menu_personalInfo_activity = new MenuNode("Activity Level");
+
+        // View Personal Info 
         MenuNode menu_personalInfo_view = new MenuNode("View Personal Info");
+        menu_personalInfo_view.setAction(() -> personalInfoService.viewPersonalInfo(scanner));
+
         MenuNode menu_personalInfo_remove = new MenuNode("Remove A Personal Info Entry");
 
         // Add submenus for Personal Menu Node
