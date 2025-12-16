@@ -141,5 +141,28 @@ public class PersonalInfoService {
         userData.addPersonalInfoEntry(personalInfo);     // Update the UserData
 
     }
+    
+    // Allows the user to view all of their personal info entires
+    public void viewPersonalInfo(Scanner scanner) {
+        
+        // print out all the perosnalInfo entries
+        for (int i = 0; i < userData.numOfPerosonalInfoEntries(); i++) {
+
+            UserData.PersonalInfo personalInfo = userData.getPersonalInfos().get(i);        // get the entry at index i
+            System.out.println("=======================================");
+            System.out.println("Personal Info Entry #: "    + i+1);
+            System.out.println("=======================================");
+            System.out.println("Age: "                      + personalInfo.getAge());
+            System.out.println("Gender: "                   + personalInfo.getGender());
+            System.out.println("Height (In CM): "           + personalInfo.getHeight_cm());
+            System.out.println("Weight (In LBS): "          + personalInfo.getWeight_lbs());
+            System.out.println("Activity Level: "           + personalInfo.getActivityLevelString());
+            System.out.println("_________________________________________________________________\n");
+        }
+        
+        // let the user read the input
+        System.out.println("Press ENTER to whenever your finished...");
+        scanner.nextLine();
+    }
 
 }
