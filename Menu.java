@@ -68,7 +68,7 @@ public class Menu {
     private Scanner scanner;
 
     // Constructor to build the entire menu structure
-    public Menu(PersonalInfoService personalInfoService) {
+    public Menu(PersonalInfoService personalInfoService, NutritionTrackerService nutritionTrackerService) {
 
         scanner = new Scanner(System.in);               // Initialize scanner object
 
@@ -178,6 +178,8 @@ public class Menu {
 
         // Construct Food Tracker menu's submenus
         MenuNode menu_nutritionTracker_food_add = new MenuNode("Add a Food Item");
+        menu_nutritionTracker_food_add.setAction( () -> nutritionTrackerService.addFoodItem(scanner) );
+
         MenuNode menu_nutritionTracker_food_view = new MenuNode("View Food Items");
         MenuNode menu_nutritionTracker_food_remove = new MenuNode("Remove Food Item");
         MenuNode menu_nutritionTracker_food_edit = new MenuNode("Edit Entry of a Food Item");

@@ -1,15 +1,37 @@
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class UserData {
 
-    private ArrayList<PersonalInfo> personalInfos = new ArrayList<>(10);                  // list of personal info entries
+    private ArrayList<PersonalInfo> personalInfos = new ArrayList<>(10);                                // list of personal info entries
+    private HashMap<Calendar, LinkedList<FoodEntry>> foodEntriesByDate = new HashMap<>();      // Map of (Key: Date of Entry) --> (Value: Food Entry)
 
     public void addPersonalInfoEntry(PersonalInfo personalInfo) {
         personalInfos.add(personalInfo);
     }
     public ArrayList<PersonalInfo> getPersonalInfos() {return personalInfos;}
     public int numOfPerosonalInfoEntries() {return personalInfos.size();}
+    public HashMap<Calendar, LinkedList<FoodEntry>> getFoodEntriesByDate() {return foodEntriesByDate;}
+
+    public void addFoodEntry(Calendar dateOfEntry, FoodEntry foodEntry) {
+        
+        LinkedList<FoodEntry> foodEntryList;
+
+        // Check if theres food entries for that date. If so, add the food entry to the list 
+        if (foodEntriesByDate.containsKey(dateOfEntry)) {
+            foodEntryList = foodEntriesByDate.get(dateOfEntry);       // retrive the list of food entries for that date
+            foodEntryList.add(foodEntry);                       // add that food entry to the list of food entries for that date
+            return;
+        }
+
+        // Case where Date was not found. Add a date entry  and create a new list
+        foodEntryList = new LinkedList<FoodEntry>();
+        foodEntryList.add(foodEntry);
+        foodEntriesByDate.put(dateOfEntry, foodEntryList);
+        
+    }
 
     public static class PersonalInfo {
 
@@ -76,12 +98,43 @@ public class UserData {
             }
         }
 
+
         // setters
         public void setAge(int age) {this.age = age;}
         public void setWeight_lbs(int weight) {this.weight_lbs = weight;}
         public void setHeight_cm(int height) {this.height_cm = height;}
         public void setActivityLevel(int activityLevel) {this.activityLevel = activityLevel;}
         public void setGender(char gender) {this.gender = gender;}
+
+    }
+
+    public static class FoodEntry {
+
+        private String nameOfFood;
+        private int calories;
+        private int quantity;
+        private String mealType;            // breakfast, lunch, or dinner, etc
+
+        // Constructor
+        public FoodEntry(String nameOfFood, int calories, int quantity, String mealType) {
+            this.nameOfFood = nameOfFood;
+            this.calories = calories;
+            this.quantity = quantity;
+            this.mealType = mealType;
+            
+        }
+
+        // getters
+        public String getNameOfFood() {return nameOfFood;}
+        public int getCalories() {return calories;}
+        public int getQuantity() {return quantity;}
+        public String getMealType() {return mealType;}
+
+        // setters
+        public void setNameOfFood(String nameOfFood) {this.nameOfFood = nameOfFood;}
+        public void setCalories(int calories) {this.calories = calories;}
+        public void setQuantity(int quantity) {this.quantity = quantity;}
+        public void setMealType(String mealType) {this.mealType = mealType;}
 
     }
         

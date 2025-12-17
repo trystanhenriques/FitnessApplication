@@ -3,8 +3,9 @@ public class FitnessApplication {
         
         UserData userData = new UserData();                                             // Initialize User Data
         PersonalInfoService personalInfoService = new PersonalInfoService(userData);    // Initialize Personal Info Service
+        NutritionTrackerService nutritionTrackerService = new NutritionTrackerService(userData);
 
-        Menu menu = new Menu(personalInfoService);
+        Menu menu = new Menu(personalInfoService, nutritionTrackerService);
         menu.start();
     }
 }
